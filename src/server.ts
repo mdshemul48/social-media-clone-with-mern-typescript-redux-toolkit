@@ -6,6 +6,7 @@ dotenv.config();
 const port = process.env.PORT || 5000;
 const app = express();
 
+// all the routes
 app.get("/", (req: Request, res: Response) => {
   res.send("hell world");
 });
