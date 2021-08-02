@@ -35,15 +35,17 @@ export const signup = async (req: Request, res: Response) => {
     // hashing the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const newUser: SignupInterface = await new User({
+
+    // creating new user
+    const newUser = await User.create({
       firstName,
       lastName,
       email,
-      password
+      password: hashedPassword
     });
     console.log(newUser);
-  } catch (error) {
-    console.log('error');
+  } catch (error:any) {
+    return res.status(500).json({ errors: [{ msg: error!.message }] });
   }
 
   return res.send('ok');
