@@ -3,3 +3,8 @@
 body{
     font-family: 'Poppins', sans-serif;
 }
+
+/* ========================
+    components
+======================== */
+@import url(./login/facebookInfo.css)
