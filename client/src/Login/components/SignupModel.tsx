@@ -1,13 +1,20 @@
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 // interface (type)
 import { signupModel } from '../../types/login';
 
+// component
+import SignupForm from './SignupForm';
 const SignupModel: React.FC<signupModel> = (props) => {
   const { show, onClone } = props;
   return (
     <Modal show={show} onHide={onClone}>
-      <h1>hello world</h1>
+      <Modal.Header closeButton>
+        <Modal.Title>Sign Up</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <SignupForm />
+      </Modal.Body>
     </Modal>
   );
 };
