@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 // interface (type)
-import { signupModel } from '../../types/login';
+import { signupModel } from '../../../types/login';
 
 // component
 import SignupForm from './SignupForm';
