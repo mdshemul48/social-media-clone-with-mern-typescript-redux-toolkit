@@ -11,9 +11,7 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "rules": {
-      "no-console": "off",
-      "comma-dangle": ["error", "never"]
-    }
+    "no-console": "off",
+    "comma-dangle": ["error", "never"]
   }
 }
