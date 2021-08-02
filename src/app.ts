@@ -1,9 +1,10 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
+
+// user controller
+import userRoutes from './routes/userRoutes';
 
 const app = Router();
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('hell world');
-});
+app.use(userRoutes);
 
 export default app;
