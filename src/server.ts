@@ -1,17 +1,17 @@
-/* eslint-disable no-multiple-empty-lines */
-import express, { Request, Response } from 'express';
+import express from 'express';
 import dotenv from 'dotenv';
+
+// app
+import app from './app';
 
 // server config
 dotenv.config();
 const port = process.env.PORT || 5000;
-const app = express();
+const server = express();
 
 // all the routes
-app.get('/', (req: Request, res: Response) => {
-  res.send('hell world');
-});
+server.use(app);
 
-app.listen(port, () => {
-  console.log('api rocks in http://localhost:5000');
+server.listen(port, () => {
+  console.log(`api rocks in http://localhost:${port}`);
 });
