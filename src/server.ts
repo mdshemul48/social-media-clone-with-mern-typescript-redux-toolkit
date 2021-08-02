@@ -13,6 +13,8 @@ const server = express();
 // connecting mongoose
 mongooseConnect();
 
+server.use(express.json());
+
 // all the routes
 server.use(app);
 
