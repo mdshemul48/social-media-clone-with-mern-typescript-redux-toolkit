@@ -54,6 +54,7 @@ export const signup = async (req: Request, res: Response) => {
       email,
       id: newUser._id
     }, secretKey);
+
     return res.status(201).json({ token });
   } catch (error:any) {
     return res.status(500).json({ errors: [{ msg: error!.message }] });
