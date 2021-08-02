@@ -17,8 +17,8 @@ const userSchema = new Schema(
     password: {
       required: true,
       type: String
-    },
-    posts: [{ id: Schema.Types.ObjectId, ref: 'post' }]
+    }
+    // posts: [{ id: Schema.Types.ObjectId, ref: 'Post', required: false }]
   },
   { timestamps: true }
 );
