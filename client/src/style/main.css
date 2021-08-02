@@ -7,4 +7,5 @@ body{
 /* ========================
     components
 ======================== */
-@import url(./login/facebookInfo.css)
+/* login page */
+@import url(./components/login/facebookInfo.css)
