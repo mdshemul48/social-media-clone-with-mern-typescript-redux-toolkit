@@ -5,7 +5,9 @@
   "main": "dict/server.js",
   "scripts": {
     "start": "node dict/server.js",
-    "dev": "nodemon src/server.ts",
+    "server": "nodemon src/server.ts",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\" ",
     "build": "tsc -p .",
     "lint": "./node_modules/.bin/eslint src/server.ts"
   },
@@ -22,6 +24,7 @@
     "@types/node": "^16.4.10",
     "@typescript-eslint/eslint-plugin": "^4.28.5",
     "@typescript-eslint/parser": "^4.28.5",
+    "concurrently": "^6.2.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",
