@@ -1,5 +1,3 @@
-import React from 'react';
-
 import facebookLogo from '../../assets/nameLogo.svg';
 const FacebookIntro = () => {
   return (

@@ -1,7 +1,8 @@
 import { Row, Col, Container } from 'react-bootstrap';
 
+// components
 import FacebookIntro from './components/FacebookIntro';
-
+import LoginSection from './components/LoginSection';
 const Login = () => {
   return (
     <Container>
@@ -10,7 +11,7 @@ const Login = () => {
           <FacebookIntro />
         </Col>
         <Col lg={6} md={6} sm={12}>
-          g
+          <LoginSection />
         </Col>
       </Row>
     </Container>
