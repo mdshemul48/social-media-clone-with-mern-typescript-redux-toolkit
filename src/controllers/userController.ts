@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
-import { SignupInterface } from '../types/user';
+import jwt from 'jsonwebtoken';
+import { SignupInterface, UserInterface } from '../types/user';
 
 // user model
 import User from '../model/userModal';
@@ -37,18 +38,26 @@ export const signup = async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // creating new user
-    const newUser = await User.create({
+    const newUser:UserInterface = await User.create({
       firstName,
       lastName,
       email,
       password: hashedPassword
     });
-    console.log(newUser);
+
+    // creating token
+    const secretKey = <string>process.env.SECRET_KEY;
+
+    const token = jwt.sign({
+      firstName,
+      lastName,
+      email,
+      id: newUser._id
+    }, secretKey);
+    return res.status(201).json({ token });
   } catch (error:any) {
     return res.status(500).json({ errors: [{ msg: error!.message }] });
   }
-
-  return res.send('ok');
 };
 
 export const login = (req: Request, res: Response) => {
