@@ -5,7 +5,8 @@ import { UserReducer } from '../../types/userReducer';
 const initialState: UserReducer = {
   token: undefined,
   user: undefined,
-  errors: []
+  errors: [],
+  loading: false
 };
 
 const reducers = {
@@ -23,3 +24,7 @@ const reducers = {
   }
 };
 export const userSlice = createSlice({ initialState, reducers, name: 'user' });
+
+export const { setUser, removeUser, setError, clearError } = userSlice.actions;
+
+export default userSlice.reducer;

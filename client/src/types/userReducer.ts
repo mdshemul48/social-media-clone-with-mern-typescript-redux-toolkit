@@ -5,4 +5,5 @@ export interface UserReducer {
   errors: {
     msg: string;
   }[];
+  loading: boolean;
 }

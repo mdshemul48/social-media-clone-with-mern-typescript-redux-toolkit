@@ -1,3 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
+import userState from './reducers/user';
 
-const reducers = configureStore({ reducer: {} });
+export default configureStore({ reducer: { userState } });
