@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-
+import cors from 'cors';
 // mongoose connector function
 import mongooseConnect from './config/mongooseConnect';
 // app
@@ -14,6 +14,7 @@ const server = express();
 mongooseConnect();
 
 server.use(express.json());
+server.use(cors());
 
 // all the routes
 server.use(app);
