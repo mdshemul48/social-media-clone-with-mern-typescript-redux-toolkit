@@ -1,4 +1,9 @@
-import { setUser, removeUser, setError, clearError } from '../reducers/user';
+import {
+  setUser,
+  removeUser,
+  setError,
+  clearError
+} from '../reducers/userReducer';
 
 // type interface
 import signupInterface from '../../types/signup';
@@ -9,7 +14,6 @@ export const signup = (formData: signupInterface) => {
   return async (dispatch: AppDispatch) => {
     try {
       const { data } = await axios.post<{ token: string }>('/signup', formData);
-      console.log(data);
       dispatch(setUser(data.token));
     } catch (error: any) {
       console.log(error.response);

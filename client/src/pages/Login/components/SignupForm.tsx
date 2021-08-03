@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import signupFormInterface from '../../../types/signup';
 
-import { signup } from '../../../store/asyncMethods/auth';
+import { signup } from '../../../store/asyncMethods/authMethod';
 
 const SignupForm = () => {
   const dispatch = useDispatch();
