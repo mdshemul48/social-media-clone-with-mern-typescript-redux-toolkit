@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import decodeJwt from '../../util/decodeJwt';
 import { UserReducer } from '../../types/userReducer';
 
+import { errorMessageInterface } from '../../types/errorInterface';
+
 const initialState: UserReducer = {
   token: undefined,
   user: undefined,
@@ -30,12 +32,17 @@ const reducers = {
     localStorage.setItem('token', token);
     return state;
   },
+
   removeUser(state: UserReducer) {
     return state;
   },
-  setError(state: UserReducer, action: PayloadAction) {
+
+  setError(state: UserReducer, action: PayloadAction<errorMessageInterface[]>) {
+    const errors = action.payload;
+    state.errors = errors;
     return state;
   },
+
   clearError(state: UserReducer) {
     return state;
   }
