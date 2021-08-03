@@ -3,7 +3,7 @@ import {
   removeUser,
   setError,
   clearError
-} from '../reducers/userReducer';
+} from '../reducers/authReducer';
 
 // type interface
 import signupInterface from '../../types/signup';
