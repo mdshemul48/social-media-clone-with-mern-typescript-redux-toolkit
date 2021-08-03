@@ -11,7 +11,9 @@ export const signupValidator = [
   body('firstName').notEmpty().withMessage('Fist Name required'),
   body('lastName').notEmpty().withMessage('Last Name required'),
   body('email').isEmail().withMessage('Email Address Required'),
-  body('password').isLength({ min: 8 })
+  body('password')
+    .isLength({ min: 8 })
+    .withMessage('Password must be 8 characters long.')
 ];
 
 export const signup = async (req: Request, res: Response) => {
