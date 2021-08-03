@@ -10,6 +10,7 @@ export const signup = (formData: signupInterface) => {
     try {
       const { data } = await axios.post<{ token: string }>('/signup', formData);
       console.log(data);
+      dispatch(setUser(data.token));
     } catch (error: any) {
       console.log(error.response);
     }
