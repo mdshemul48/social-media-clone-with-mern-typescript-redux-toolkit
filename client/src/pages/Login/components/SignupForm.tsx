@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import signupFormInterface from '../../../types/signup';
 
+import { signup } from '../../../store/asyncMethods/auth';
+
 const SignupForm = () => {
+  const dispatch = useDispatch();
+
   const [formState, setFormState] = useState<signupFormInterface>({
     firstName: '',
     lastName: '',
     email: '',
     password: ''
   });
-
   const inputChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
@@ -20,6 +24,7 @@ const SignupForm = () => {
 
   const signupFormHandler = (event: React.FormEvent): void => {
     event.preventDefault();
+    dispatch(signup(formState));
   };
 
   return (
