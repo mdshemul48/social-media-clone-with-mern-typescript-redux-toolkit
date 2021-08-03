@@ -11,6 +11,8 @@ const initialState: UserReducer = {
 
 const reducers = {
   setUser(state: UserReducer, action: PayloadAction) {
+    // const { token } = action.payload;
+
     return state;
   },
   removeUser(state: UserReducer) {
