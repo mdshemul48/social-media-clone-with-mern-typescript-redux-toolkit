@@ -7,6 +7,7 @@ import {
 
 // routes
 import PrivateRoute from './Routes/PrivateRoute';
+import LoginRoute from './Routes/LoginRoute';
 //pages
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
@@ -15,8 +16,8 @@ function App() {
   return (
     <Router>
       <Switch>
+        <LoginRoute path="/login" component={Login} />
         <PrivateRoute path="/" component={Home} />
-        <Route path="/login" component={Login} exact />
         <Redirect to="/" />
         <Login />
       </Switch>

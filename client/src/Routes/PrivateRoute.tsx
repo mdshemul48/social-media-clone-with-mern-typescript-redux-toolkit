@@ -8,7 +8,6 @@ const PrivateRoute: FC<PrivateRouteInterface> = (props) => {
   const { user } = useSelector(
     (state: { userState: UserReducer }) => state.userState
   );
-
   return user ? (
     <Route path={path} component={component} exact />
   ) : (
