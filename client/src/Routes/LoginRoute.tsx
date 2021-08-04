@@ -9,10 +9,10 @@ const LoginRoute: React.FC<{ path: string; component: React.FC }> = (props) => {
     (state: { userState: UserReducer }) => state.userState
   );
 
-  return !user ? (
-    <Route path={path} component={component} />
-  ) : (
+  return user ? (
     <Redirect to="/" />
+  ) : (
+    <Route path={path} component={component} exact />
   );
 };
 
