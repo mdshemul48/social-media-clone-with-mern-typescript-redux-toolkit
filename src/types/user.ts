@@ -4,6 +4,6 @@ export interface SignupInterface {
   email: string;
   password: string;
 }
-export interface UserInterface extends SignupInterface{
-  _id: string
+export interface UserInterface extends SignupInterface {
+  _id: string;
 }
