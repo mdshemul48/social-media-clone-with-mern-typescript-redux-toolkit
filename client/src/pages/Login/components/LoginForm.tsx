@@ -1,7 +1,10 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { useDispatch } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 
+import { login } from '../../../store/asyncMethods/authMethod';
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const [formState, setFormState] = useState({
     email: '',
     password: ''
@@ -11,9 +14,16 @@ const LoginForm = () => {
     const { name, value } = event.target;
     setFormState((PrevState) => ({ ...PrevState, [name]: value }));
   };
+  const loginSubmitHandler = (event: FormEvent) => {
+    console.log('gg');
+
+    event.preventDefault();
+
+    dispatch(login(formState));
+  };
 
   return (
-    <Form>
+    <Form onSubmit={loginSubmitHandler}>
       <Form.Group className="mb-2">
         <Form.Control
           onChange={inputChangeHandler}
@@ -35,7 +45,7 @@ const LoginForm = () => {
         />
       </Form.Group>
       <Form.Group className="d-grid mb-2">
-        <Button variant="primary" size="lg">
+        <Button variant="primary" size="lg" type="submit">
           Log In
         </Button>
       </Form.Group>
