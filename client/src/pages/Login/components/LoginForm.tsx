@@ -17,6 +17,8 @@ const LoginForm = () => {
       <Form.Group className="mb-2">
         <Form.Control
           onChange={inputChangeHandler}
+          value={formState.email}
+          name="email"
           placeholder="Email Address"
           type="email"
           className="py-2"
@@ -25,6 +27,8 @@ const LoginForm = () => {
       <Form.Group className="mb-2">
         <Form.Control
           onChange={inputChangeHandler}
+          value={formState.password}
+          name="password"
           placeholder="Password"
           type="password"
           className="py-2"
