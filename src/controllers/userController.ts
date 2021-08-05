@@ -21,7 +21,7 @@ export const signup = async (req: Request, res: Response) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(422).json({ errors: errors.array() });
   }
   try {
     // checking if user exist
@@ -68,11 +68,17 @@ export const loginValidator = [
   body('email').isEmail().withMessage('invalid email address'),
   body('password')
     .isLength({ min: 8 })
-    .withMessage('Password must be 8 characters long.')
+    .withMessage('Password must be 8 characters long')
 ];
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = <{ email: string; password: string }>req.body;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
   try {
     const user: UserInterface = await User.findOne({ email });
     if (!user) {
