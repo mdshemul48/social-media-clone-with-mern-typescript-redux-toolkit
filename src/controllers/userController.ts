@@ -64,6 +64,13 @@ export const signup = async (req: Request, res: Response) => {
   }
 };
 
+export const loginValidator = [
+  body('email').isEmail().withMessage('invalid email address'),
+  body('password')
+    .isLength({ min: 8 })
+    .withMessage('Password must be 8 characters long.')
+];
+
 export const login = async (req: Request, res: Response) => {
   const { email, password } = <{ email: string; password: string }>req.body;
   try {
