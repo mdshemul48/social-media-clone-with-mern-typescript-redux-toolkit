@@ -1,4 +1,4 @@
-import { setUser, removeUser, setError } from '../reducers/authReducer';
+import { setUser, setError } from '../reducers/authReducer';
 // type interface
 import errorInterface from '../../types/errorInterface';
 import signupInterface from '../../types/signup';
