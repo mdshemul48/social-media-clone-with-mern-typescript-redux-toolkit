@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 
+import { useDispatch } from 'react-redux';
+import { removeUser } from '../../store/reducers/authReducer';
 // logo and icons
 import circleLogo from '../../assets/facebook_circle_logo.png';
 import { AiFillHome, AiFillShop } from 'react-icons/ai';
@@ -10,6 +12,10 @@ import { MdOndemandVideo } from 'react-icons/md';
 import { RiGroup2Line } from 'react-icons/ri';
 import { AiOutlineLogout } from 'react-icons/ai';
 const NavBar = () => {
+  const dispatch = useDispatch();
+  const logoutHandler = () => {
+    dispatch(removeUser());
+  };
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -36,7 +42,7 @@ const NavBar = () => {
             </NavLink>
           </Nav>
           <Nav className="nav-bar__icons">
-            <AiOutlineLogout className="cursor " />
+            <AiOutlineLogout onClick={logoutHandler} />
           </Nav>
         </Navbar.Collapse>
       </Container>

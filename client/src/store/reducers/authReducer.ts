@@ -34,6 +34,9 @@ const reducers = {
   },
 
   removeUser(state: UserReducer) {
+    localStorage.removeItem('token');
+    state.user = undefined;
+    state.token = undefined;
     return state;
   },
 
