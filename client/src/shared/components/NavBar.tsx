@@ -1,10 +1,14 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
+
+// logo and icons
 import circleLogo from '../../assets/facebook_circle_logo.png';
 import { AiFillHome, AiFillShop } from 'react-icons/ai';
 import { FaUserFriends } from 'react-icons/fa';
 import { MdOndemandVideo } from 'react-icons/md';
 import { RiGroup2Line } from 'react-icons/ri';
+import { AiOutlineLogout } from 'react-icons/ai';
 const NavBar = () => {
   return (
     <Navbar bg="light" expand="lg">
@@ -13,24 +17,26 @@ const NavBar = () => {
           <img width="40px" src={circleLogo} alt="facebook-logo" />
         </Navbar.Brand>
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto nav-bar__icons">
-            <Nav.Link href="">
+            <NavLink to="/" className="nav-link" exact>
               <AiFillHome />
-            </Nav.Link>
-            <Nav.Link href="#">
+            </NavLink>
+            <NavLink to="/friends" className="nav-link">
               <FaUserFriends />
-            </Nav.Link>
-            <Nav.Link href="#">
+            </NavLink>
+            <NavLink to="/videos" className="nav-link">
               <MdOndemandVideo />
-            </Nav.Link>
-            <Nav.Link href="#">
+            </NavLink>
+            <NavLink to="/shop" className="nav-link">
               <AiFillShop />
-            </Nav.Link>
-            <Nav.Link href="#">
+            </NavLink>
+            <NavLink to="/group" className="nav-link">
               <RiGroup2Line />
-            </Nav.Link>
+            </NavLink>
+          </Nav>
+          <Nav className="nav-bar__icons">
+            <AiOutlineLogout className="cursor " />
           </Nav>
         </Navbar.Collapse>
       </Container>
