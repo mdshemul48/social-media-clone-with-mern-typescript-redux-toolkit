@@ -1,0 +1,9 @@
+.nav-bar__icons svg {
+  color: #65676b;
+  font-size: 1.6rem;
+  margin: 0 1rem;
+  cursor: pointer;
+}
+.active svg {
+  color: var(--primary-color) !important;
+}

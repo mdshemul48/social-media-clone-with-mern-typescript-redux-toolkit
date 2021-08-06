@@ -15,3 +15,4 @@ body {
 @import url(./components/login/facebookInfo.css);
 @import url(./components/login/loginSection.css);
 @import url(./components/login/signup.css);
+@import url(./components/shared/navbar.css);
