@@ -12,8 +12,11 @@ const SignupForm = () => {
     firstName: '',
     lastName: '',
     email: '',
-    password: ''
+    password: '',
+    image: {},
+    imagePreview: ''
   });
+
   const inputChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
@@ -26,7 +29,24 @@ const SignupForm = () => {
     event.preventDefault();
     dispatch(signup(formState));
   };
+  const fileHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target!.files!;
+    if (files!.length !== 0) {
+      console.log(files[0]);
+      const imageReader = new FileReader();
+      imageReader.onloadend = () => {
+        console.log(imageReader.result);
 
+        setFormState((prevState) => ({
+          ...prevState,
+          imagePreview: imageReader.result
+        }));
+      };
+      imageReader.readAsDataURL(files[0]);
+      setFormState((prevState) => ({ ...prevState, image: files[0] }));
+    }
+  };
+  console.log(formState);
   return (
     <Form onSubmit={signupFormHandler}>
       <Form.Group className="mb-3">
@@ -46,6 +66,9 @@ const SignupForm = () => {
             />
           </Col>
         </Row>
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Control name="image" onChange={fileHandler} type="file" />
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Control
