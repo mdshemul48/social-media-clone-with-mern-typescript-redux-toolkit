@@ -25,7 +25,8 @@
       }
     ],
     "no-underscore-dangle": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "operator-linebreak": "off"
   },
   "settings": {
     "import/resolver": {

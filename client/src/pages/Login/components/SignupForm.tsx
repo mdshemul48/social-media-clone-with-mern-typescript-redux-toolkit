@@ -12,8 +12,11 @@ const SignupForm = () => {
     firstName: '',
     lastName: '',
     email: '',
-    password: ''
+    password: '',
+    image: '',
+    imagePreview: ''
   });
+
   const inputChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
@@ -24,11 +27,49 @@ const SignupForm = () => {
 
   const signupFormHandler = (event: React.FormEvent): void => {
     event.preventDefault();
-    dispatch(signup(formState));
+
+    const form = new FormData();
+    form.append('firstName', formState.firstName);
+    form.append('lastName', formState.lastName);
+    form.append('email', formState.email);
+    form.append('password', formState.password);
+    form.append('image', formState.image);
+
+    dispatch(signup(form));
   };
 
+  const fileHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target!.files!;
+    if (files!.length !== 0) {
+      console.log(files[0]);
+      const imageReader = new FileReader();
+      imageReader.onloadend = () => {
+        setFormState((prevState) => ({
+          ...prevState,
+          imagePreview: imageReader.result
+        }));
+      };
+      imageReader.readAsDataURL(files[0]);
+      setFormState((prevState) => ({ ...prevState, image: files[0] }));
+    }
+  };
+
+  console.log(formState);
   return (
     <Form onSubmit={signupFormHandler}>
+      {formState.imagePreview && (
+        <Form.Group className="mb-3 d-flex justify-content-center">
+          {typeof formState.imagePreview === 'string' && (
+            <img
+              src={formState.imagePreview}
+              width="150px"
+              height="150px"
+              className="rounded-circle"
+              alt="gg"
+            />
+          )}
+        </Form.Group>
+      )}
       <Form.Group className="mb-3">
         <Row>
           <Col>
@@ -46,6 +87,9 @@ const SignupForm = () => {
             />
           </Col>
         </Row>
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Control name="image" onChange={fileHandler} type="file" />
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Control

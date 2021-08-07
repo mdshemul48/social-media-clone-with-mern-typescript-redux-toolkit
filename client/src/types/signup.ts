@@ -3,4 +3,6 @@ export default interface signupInterface {
   lastName: string;
   email: string;
   password: string;
+  image: string | Blob;
+  imagePreview: string | ArrayBuffer | null;
 }
