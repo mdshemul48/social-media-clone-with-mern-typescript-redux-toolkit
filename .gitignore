@@ -3,3 +3,4 @@ package-lock.json
 /dict
 yarn.lock
 .env
+/images
