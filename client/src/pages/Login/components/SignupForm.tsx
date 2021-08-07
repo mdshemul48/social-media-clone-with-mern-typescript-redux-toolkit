@@ -13,7 +13,7 @@ const SignupForm = () => {
     lastName: '',
     email: '',
     password: '',
-    image: {},
+    image: '',
     imagePreview: ''
   });
 
@@ -27,6 +27,14 @@ const SignupForm = () => {
 
   const signupFormHandler = (event: React.FormEvent): void => {
     event.preventDefault();
+
+    const form = new FormData();
+    form.append('firstName', formState.firstName);
+    form.append('lastName', formState.lastName);
+    form.append('email', formState.email);
+    form.append('password', formState.password);
+    form.append('image', formState.image);
+
     dispatch(signup(formState));
   };
 
@@ -56,7 +64,7 @@ const SignupForm = () => {
               src={formState.imagePreview}
               width="150px"
               height="150px"
-              className="rounded-circle border-danger border-2"
+              className="rounded-circle"
               alt="gg"
             />
           )}
