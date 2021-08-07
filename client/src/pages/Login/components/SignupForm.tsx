@@ -29,14 +29,13 @@ const SignupForm = () => {
     event.preventDefault();
     dispatch(signup(formState));
   };
+
   const fileHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target!.files!;
     if (files!.length !== 0) {
       console.log(files[0]);
       const imageReader = new FileReader();
       imageReader.onloadend = () => {
-        console.log(imageReader.result);
-
         setFormState((prevState) => ({
           ...prevState,
           imagePreview: imageReader.result
@@ -46,9 +45,23 @@ const SignupForm = () => {
       setFormState((prevState) => ({ ...prevState, image: files[0] }));
     }
   };
+
   console.log(formState);
   return (
     <Form onSubmit={signupFormHandler}>
+      {formState.imagePreview && (
+        <Form.Group className="mb-3 d-flex justify-content-center">
+          {typeof formState.imagePreview === 'string' && (
+            <img
+              src={formState.imagePreview}
+              width="150px"
+              height="150px"
+              className="rounded-circle border-danger border-2"
+              alt="gg"
+            />
+          )}
+        </Form.Group>
+      )}
       <Form.Group className="mb-3">
         <Row>
           <Col>
