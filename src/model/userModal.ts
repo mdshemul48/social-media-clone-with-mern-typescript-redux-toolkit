@@ -17,6 +17,10 @@ const userSchema = new Schema(
     password: {
       required: true,
       type: String
+    },
+    profileImage: {
+      type: String,
+      required: false
     }
     // posts: [{ id: Schema.Types.ObjectId, ref: 'Post', required: false }]
   },
