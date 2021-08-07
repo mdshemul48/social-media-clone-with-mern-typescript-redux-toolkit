@@ -1,7 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import bodyParser from 'body-parser';
 // mongoose connector function
 import mongooseConnect from './config/mongooseConnect';
 // app

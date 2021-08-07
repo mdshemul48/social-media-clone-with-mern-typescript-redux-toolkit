@@ -1,7 +1,6 @@
 import { setUser, setError } from '../reducers/authReducer';
 // type interface
 import errorInterface from '../../types/errorInterface';
-import signupInterface from '../../types/signup';
 import { AppDispatch } from '../index';
 import { loginInterface } from '../../types/login';
 
