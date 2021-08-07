@@ -25,94 +25,99 @@ export const signupValidator = [
 export const signup = async (req: Request, res: Response) => {
   const form = formidable({ multiples: true });
   return form.parse(req, async (err, fields, files) => {
-    if (err) {
-      return res.status(500).json({
-        errors: [{ msg: 'something went wrong with the request parser' }]
-      });
-    }
-    const { firstName, lastName, email, password } = <SignupInterface>(
-      (<unknown>fields)
-    );
-    // eslint-disable-next-line prefer-const
-    const image = <uploadImageInterface>files.image;
-    const errors = [];
-
-    if (firstName.trim().length === 0) {
-      errors.push({ msg: 'Fist Name required' });
-    }
-    if (lastName.trim().length === 0) {
-      errors.push({ msg: 'Last Name required' });
-    }
-    if (email.trim().length === 0) {
-      errors.push({ msg: 'Email Address Required' });
-    }
-    if (password.trim().length < 8) {
-      errors.push({ msg: 'Password must be 8 characters long.' });
-    }
-
-    // checking if image available
-    if (Object.keys(files).length === 0) {
-      errors.push({ msg: 'You must upload a picture' });
-    } else {
-      const extension = image.type!.split('/')[1].toLowerCase();
-      if (
-        extension !== 'jpg' &&
-        extension !== 'png' &&
-        extension !== 'jpeg' &&
-        extension !== 'gif'
-      ) {
-        errors.push({ msg: `${extension} is not valid extension.` });
-      } else if (errors.length === 0) {
-        image.name = `${uuid()}.${extension}`;
+    try {
+      if (err) {
+        return res.status(500).json({
+          errors: [{ msg: 'something went wrong with the request parser' }]
+        });
       }
-    }
-    if (errors.length !== 0) {
-      return res.status(500).json({ errors });
-    }
-    saveImage(image.path!, image.name!);
+      const { firstName, lastName, email, password } = <SignupInterface>(
+        (<unknown>fields)
+      );
+      // eslint-disable-next-line prefer-const
+      const image = <uploadImageInterface>files.image;
+      const errors = [];
 
-    return res.send('gg');
+      if (firstName.trim().length === 0) {
+        errors.push({ msg: 'Fist Name required' });
+      }
+      if (lastName.trim().length === 0) {
+        errors.push({ msg: 'Last Name required' });
+      }
+      if (email.trim().length === 0) {
+        errors.push({ msg: 'Email Address Required' });
+      }
+      if (password.trim().length < 8) {
+        errors.push({ msg: 'Password must be 8 characters long.' });
+      }
+
+      // checking if image available
+      if (Object.keys(files).length === 0) {
+        errors.push({ msg: 'You must upload a picture' });
+      } else {
+        const extension = image.type!.split('/')[1].toLowerCase();
+        if (
+          extension !== 'jpg' &&
+          extension !== 'png' &&
+          extension !== 'jpeg' &&
+          extension !== 'gif'
+        ) {
+          errors.push({ msg: `${extension} is not valid extension.` });
+        } else if (errors.length === 0) {
+          image.name = `${uuid()}.${extension}`;
+        }
+      }
+      if (errors.length !== 0) {
+        return res.status(500).json({ errors });
+      }
+
+      // =======================================
+      // creating user and saving to the db
+
+      // checking if user exist
+      const existingUser = await User.findOne({
+        email
+      });
+      if (existingUser) {
+        return res
+          .status(409)
+          .json({ errors: [{ msg: 'Email already exist.' }] });
+      }
+      // saving image to server
+      saveImage(image.path!, image.name!);
+
+      // hashing the password
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+
+      // creating new user
+      const newUser: UserInterface = await User.create({
+        firstName,
+        lastName,
+        email,
+        password: hashedPassword,
+        profileImage: image.name!
+      });
+
+      // creating token
+      const secretKey = <string>process.env.SECRET_KEY;
+
+      const token = jwt.sign(
+        {
+          firstName,
+          lastName,
+          email,
+          _id: newUser._id,
+          profileImage: image.name!
+        },
+        secretKey
+      );
+
+      return res.status(201).json({ token });
+    } catch (error: any) {
+      return res.status(500).json({ errors: [{ msg: error!.message }] });
+    }
   });
-
-  // try {
-  //   // checking if user exist
-  //   const existingUser = await User.findOne({
-  //     email
-  //   });
-  //   if (existingUser) {
-  //     return res
-  //       .status(409)
-  //       .json({ errors: [{ msg: 'Email already exist.' }] });
-  //   }
-  //   // hashing the password
-  //   const salt = await bcrypt.genSalt(10);
-  //   const hashedPassword = await bcrypt.hash(password, salt);
-
-  //   // creating new user
-  //   const newUser: UserInterface = await User.create({
-  //     firstName,
-  //     lastName,
-  //     email,
-  //     password: hashedPassword
-  //   });
-
-  //   // creating token
-  //   const secretKey = <string>process.env.SECRET_KEY;
-
-  //   const token = jwt.sign(
-  //     {
-  //       firstName,
-  //       lastName,
-  //       email,
-  //       _id: newUser._id
-  //     },
-  //     secretKey
-  //   );
-
-  //   return res.status(201).json({ token });
-  // } catch (error: any) {
-  //   return res.status(500).json({ errors: [{ msg: error!.message }] });
-  // }
 };
 
 export const loginValidator = [
@@ -148,7 +153,8 @@ export const login = async (req: Request, res: Response) => {
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
-        _id: user._id
+        _id: user._id,
+        profileImage: user.profileImage
       },
       process.env.SECRET_KEY!
     );

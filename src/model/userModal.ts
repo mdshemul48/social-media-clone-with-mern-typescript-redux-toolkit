@@ -20,7 +20,7 @@ const userSchema = new Schema(
     },
     profileImage: {
       type: String,
-      required: false
+      required: true
     }
     // posts: [{ id: Schema.Types.ObjectId, ref: 'Post', required: false }]
   },

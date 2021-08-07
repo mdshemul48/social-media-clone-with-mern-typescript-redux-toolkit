@@ -14,8 +14,7 @@ const server = express();
 mongooseConnect();
 
 server.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+server.use(express.json());
 
 // all the routes
 server.use(app);
