@@ -13,7 +13,6 @@ const port = process.env.PORT || 5000;
 const server = express();
 // connecting mongoose
 mongooseConnect();
-console.log(__dirname);
 server.use('/public', express.static(path.join(__dirname, '../images')));
 server.use(cors());
 server.use(express.json());
