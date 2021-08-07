@@ -35,7 +35,7 @@ const SignupForm = () => {
     form.append('password', formState.password);
     form.append('image', formState.image);
 
-    dispatch(signup(formState));
+    dispatch(signup(form));
   };
 
   const fileHandler = (event: React.ChangeEvent<HTMLInputElement>) => {

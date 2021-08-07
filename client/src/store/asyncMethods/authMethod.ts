@@ -7,7 +7,7 @@ import { loginInterface } from '../../types/login';
 
 import axios from '../../config/axios';
 
-export const signup = (formData: signupInterface) => {
+export const signup = (formData: FormData) => {
   return async (dispatch: AppDispatch) => {
     try {
       const { data } = await axios.post<{ token: string }>('/signup', formData);
