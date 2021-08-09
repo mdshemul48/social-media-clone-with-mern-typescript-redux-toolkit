@@ -3,15 +3,16 @@ import jwt from 'jsonwebtoken';
 import { UserInterface } from '../types/user';
 
 export default (req: Request, res: Response, next: NextFunction) => {
-  const { Authorization } = req.headers;
-  if (!Authorization) {
+  const { authorization } = req.headers;
+
+  if (!authorization) {
     return res.status(401).json({ errors: [{ msg: 'token not passed.' }] });
   }
-  if (typeof Authorization !== 'string') {
+  if (typeof authorization !== 'string') {
     return res.status(401).json({ errors: [{ msg: 'invalid token' }] });
   }
 
-  const token = Authorization.split(' ')[1];
+  const token = authorization.split(' ')[1];
   const decodedData = <UserInterface>jwt.verify(token, process.env.SECRET_KEY!);
   if (!decodedData) {
     return res.status(401).json({ errors: [{ msg: 'invalid token' }] });
