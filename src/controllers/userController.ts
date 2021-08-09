@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 import { SignupInterface, UserInterface } from '../types/user';
 
 // user model
-import User from '../model/userModal';
+import User from '../model/userModel';
 
 import uploadImageInterface from '../types/uploadedImage';
 // utils
