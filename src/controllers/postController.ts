@@ -29,7 +29,7 @@ export const createPost = (req: Request, res: Response) => {
       if (body.trim().length === 0) {
         errors.push({ msg: 'Invalid post.' });
       }
-
+      // getting user
       const user: UserInterface = await User.findOne({ _id: creatorId });
       if (!user) {
         errors.push({ msg: 'user not found' });
@@ -39,6 +39,7 @@ export const createPost = (req: Request, res: Response) => {
         return res.status(400).json({ errors });
       }
 
+      // creating post
       const newPost: PostInterface = new Post({
         user: user._id,
         body,
@@ -65,11 +66,11 @@ export const createPost = (req: Request, res: Response) => {
       if (errors.length > 0) {
         return res.status(400).json({ errors });
       }
-      user.posts.push(newPost._id);
 
+      user.posts.push(newPost._id);
       user.save();
       newPost.save();
-      return res.send('hello world');
+      return res.status(201).json({ post: newPost, msg: 'New post created.' });
     } catch (error) {
       return res.send(error);
     }
