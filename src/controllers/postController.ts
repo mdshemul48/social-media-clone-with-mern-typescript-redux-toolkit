@@ -1,11 +1,15 @@
 import { Request, Response } from 'express';
 import formidable from 'formidable';
+import { v4 as uuid } from 'uuid';
 
+// ts interface
 import { UserInterface } from '../types/user';
 import PostInterface from '../types/PostType';
+import ImageInfo from '../types/uploadedImage';
 // db model
 import User from '../model/userModel';
 import Post from '../model/postModel';
+import saveImage from '../util/saveImage';
 
 export const createPost = (req: Request, res: Response) => {
   const form = formidable({ multiples: true });
@@ -20,7 +24,7 @@ export const createPost = (req: Request, res: Response) => {
 
       const creatorId = <string>req.body.userId;
       const { body } = <{ body: string }>fields;
-      const { image } = files;
+      const image = <ImageInfo>files.image;
 
       if (body.trim().length === 0) {
         errors.push({ msg: 'Invalid post.' });
@@ -42,7 +46,27 @@ export const createPost = (req: Request, res: Response) => {
         comments: []
       });
 
+      if (image) {
+        const extension = image.type!.split('/')[1].toLowerCase();
+        if (
+          extension !== 'jpg' &&
+          extension !== 'png' &&
+          extension !== 'jpeg' &&
+          extension !== 'gif'
+        ) {
+          errors.push({ msg: `${extension} is not valid extension.` });
+        } else if (errors.length === 0) {
+          const newImageName = `${uuid()}.${extension}`;
+          saveImage(image.path!, newImageName);
+          newPost.image = newImageName;
+        }
+      }
+
+      if (errors.length > 0) {
+        return res.status(400).json({ errors });
+      }
       user.posts.push(newPost._id);
+
       user.save();
       newPost.save();
       return res.send('hello world');
