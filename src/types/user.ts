@@ -4,6 +4,7 @@ export interface SignupInterface {
   email: string;
   password: string;
   profileImage: string;
+  posts: [];
 }
 export interface UserInterface extends SignupInterface {
   _id: string;
