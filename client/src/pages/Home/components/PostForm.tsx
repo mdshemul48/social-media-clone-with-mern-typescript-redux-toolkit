@@ -22,7 +22,7 @@ const PostForm = () => {
           />
         </Form.Group>
         <Form.Group>
-          <div className="bg-light border rounded px-2 py-2 d-flex justify-content-between px-3">
+          <div className="border rounded px-2 py-2 d-flex justify-content-between px-3">
             <div>
               <span>Add To Your Post</span>
             </div>
