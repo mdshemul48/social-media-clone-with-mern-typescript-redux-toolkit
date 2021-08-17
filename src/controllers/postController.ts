@@ -26,8 +26,7 @@ export const createPost = (req: Request, res: Response) => {
         errors.push({ msg: 'Invalid post.' });
       }
 
-      const user = <UserInterface>User.findOne({ _id: creatorId });
-
+      const user: UserInterface = await User.findOne({ _id: creatorId });
       if (!user) {
         errors.push({ msg: 'user not found' });
       }
@@ -42,9 +41,13 @@ export const createPost = (req: Request, res: Response) => {
         likes: [],
         comments: []
       });
+
+      user.posts.push(newPost._id);
+      user.save();
       newPost.save();
+      return res.send('hello world');
     } catch (error) {
-      console.log(error);
+      return res.send(error);
     }
   });
 };

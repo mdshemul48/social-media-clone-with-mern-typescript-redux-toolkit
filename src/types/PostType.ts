@@ -1,4 +1,5 @@
 export default interface PostInterface {
+  _id: string;
   user: string;
   body: string;
   image: string;
