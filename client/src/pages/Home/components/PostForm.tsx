@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { UserReducer } from '../../../types/userReducer';
@@ -41,6 +41,11 @@ const PostForm = () => {
               </label>
             </div>
           </div>
+        </Form.Group>
+        <Form.Group className="my-2 d-grid">
+          <Button type="submit" disabled={true}>
+            Post
+          </Button>
         </Form.Group>
       </Form>
     </div>
