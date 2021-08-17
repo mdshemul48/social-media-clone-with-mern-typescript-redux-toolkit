@@ -4,5 +4,6 @@ export default interface PostInterface {
   image: string;
   likes: string[];
   comments: { comment: string; userId: string }[];
+  save: () => void;
   // eslint-disable-next-line semi
 }
