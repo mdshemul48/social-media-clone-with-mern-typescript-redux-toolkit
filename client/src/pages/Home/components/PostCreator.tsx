@@ -22,7 +22,7 @@ const PostCreator = () => {
             alt=""
           />
         )}
-        <p className="flex-fill px-2 py-2 mx-2 mt-2 post_create_section">
+        <p className="flex-fill px-2 py-2 mx-2 mt-3 post_create_section">
           what's on your mind, {user?.firstName}.?
         </p>
       </div>

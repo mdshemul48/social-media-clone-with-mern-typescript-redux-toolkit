@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import authMiddleware from '../middleware/authMiddleware';
 
+import { createPost } from '../controllers/postController';
+
 const router = Router();
 
-router.get('/post', authMiddleware, (req, res) => {
-  console.log(req.body.userId);
-  res.send('hello world');
-});
+router.post('/post', authMiddleware, createPost);
+
 export default router;

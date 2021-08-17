@@ -21,8 +21,8 @@ const userSchema = new Schema(
     profileImage: {
       type: String,
       required: true
-    }
-    // posts: [{ id: Schema.Types.ObjectId, ref: 'Post', required: false }]
+    },
+    posts: [{ type: Schema.Types.ObjectId, ref: 'Post', required: false }]
   },
   { timestamps: true }
 );

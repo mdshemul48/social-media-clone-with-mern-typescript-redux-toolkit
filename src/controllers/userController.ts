@@ -23,7 +23,7 @@ export const signupValidator = [
 ];
 
 export const signup = async (req: Request, res: Response) => {
-  const form = formidable({ multiples: true });
+  const form = formidable({ multiples: false });
   return form.parse(req, async (err, fields, files) => {
     try {
       if (err) {
@@ -96,7 +96,8 @@ export const signup = async (req: Request, res: Response) => {
         lastName,
         email,
         password: hashedPassword,
-        profileImage: image.name!
+        profileImage: image.name!,
+        posts: []
       });
 
       // creating token
