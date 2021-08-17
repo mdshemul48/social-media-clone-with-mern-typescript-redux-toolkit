@@ -1,10 +1,10 @@
 import { Container } from 'react-bootstrap';
 
-import PostCreator from './PostCreator';
+import PostCreate from './PostCreate';
 const NewsFeed = () => {
   return (
     <Container fluid className="w-50 mx-auto">
-      <PostCreator />
+      <PostCreate />
     </Container>
   );
 };
