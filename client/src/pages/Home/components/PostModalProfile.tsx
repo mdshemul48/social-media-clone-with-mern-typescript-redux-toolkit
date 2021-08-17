@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-
+import { GiEarthAmerica } from 'react-icons/gi';
 import { UserReducer } from '../../../types/userReducer';
 
 const PostModalProfile = () => {
@@ -27,7 +27,9 @@ const PostModalProfile = () => {
         <span className="d-block">
           {user?.firstName} {user?.lastName}
         </span>
-        <span className="public-bg text-white px-2 rounded">Public</span>
+        <span className="public-bg text-dark px-2 rounded fw-normal">
+          <GiEarthAmerica /> Public
+        </span>
       </div>
     </div>
   );
