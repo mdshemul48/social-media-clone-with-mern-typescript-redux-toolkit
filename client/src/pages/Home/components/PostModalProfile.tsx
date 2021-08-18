@@ -7,8 +7,6 @@ const PostModalProfile = () => {
   const { user } = useSelector(
     (state: { userState: UserReducer }) => state.userState
   );
-  console.log(user);
-
   return (
     <div className="d-flex mb-2">
       <div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -10,6 +10,26 @@ const PostForm = () => {
   const { user } = useSelector(
     (state: { userState: UserReducer }) => state.userState
   );
+
+  const [formState, setFormData] = useState({
+    body: '',
+    image: undefined
+  });
+
+  const [hidePostButton, setHidePostButton] = useState(true);
+
+  const imageChangeHandler = (event: React.FormEvent<HTMLInputElement>) => {};
+  const bodyChangeHandler = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ): void => {
+    const bodyValue = event.target.value;
+    setFormData((prevState) => ({ ...prevState, body: bodyValue }));
+    if (formState.body.length > 0) {
+      console.log(hidePostButton);
+
+      setHidePostButton(false);
+    }
+  };
   return (
     <div className="post-form">
       <PostModalProfile />
@@ -19,6 +39,8 @@ const PostForm = () => {
             className="w-100"
             rows={4}
             placeholder={`What's on your mind, ${user?.firstName}.?`}
+            name="body"
+            onChange={bodyChangeHandler}
           />
         </Form.Group>
         <Form.Group>
@@ -37,13 +59,14 @@ const PostForm = () => {
                   type="file"
                   className="d-none"
                   id="image-upload"
+                  name="image"
                 />
               </label>
             </div>
           </div>
         </Form.Group>
         <Form.Group className="my-2 d-grid">
-          <Button type="submit" disabled={true}>
+          <Button type="submit" disabled={hidePostButton}>
             Post
           </Button>
         </Form.Group>
