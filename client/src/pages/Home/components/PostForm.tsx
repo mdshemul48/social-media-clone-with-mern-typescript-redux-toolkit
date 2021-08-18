@@ -29,7 +29,7 @@ const PostForm = () => {
 
       fileReader.onloadend = (event: ProgressEvent<FileReader>) => {
         const imageUrl = event.target?.result;
-        if (imageUrl) {
+        if (imageUrl && typeof imageUrl === 'string') {
           setFormData((prevState) => ({
             ...prevState,
             image,
@@ -59,12 +59,18 @@ const PostForm = () => {
         <Form.Group>
           <textarea
             className="w-100"
-            rows={4}
+            rows={3}
             placeholder={`What's on your mind, ${user?.firstName}.?`}
             name="body"
             onChange={bodyChangeHandler}
           />
         </Form.Group>
+        <Form.Group className="my-3">
+          {formState.imagePreview && (
+            <img className="img-fluid" src={formState.imagePreview} alt="" />
+          )}
+        </Form.Group>
+
         <Form.Group>
           <div className="border rounded px-2 py-2 d-flex justify-content-between px-3">
             <div>
@@ -88,6 +94,7 @@ const PostForm = () => {
             </div>
           </div>
         </Form.Group>
+
         <Form.Group className="my-2 d-grid">
           <Button type="submit" disabled={hidePostButton}>
             Post
