@@ -4,7 +4,6 @@ import { v4 as uuid } from 'uuid';
 
 // ts interface
 import { UserInterface } from '../types/user';
-import PostInterface from '../types/PostType';
 import ImageInfo from '../types/uploadedImage';
 // db model
 import User from '../model/userModel';
