@@ -23,7 +23,6 @@ const Login = () => {
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} />
-
       <Container className="mt-lg-5">
         <Row>
           <Col lg={6} md={6} sm={12}>

@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { Toaster, toast } from 'react-hot-toast';
 
 // async methods
 import { createPost } from '../../../store/asyncMethods/postMethod';
 // types
 import { UserReducer } from '../../../types/userReducer';
+import { postsState } from '../../../types/postInterface';
 import { postInterface } from '../../../types/postInterface';
 
 // components
@@ -18,6 +20,10 @@ const PostForm = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(
     (state: { userState: UserReducer }) => state.userState
+  );
+
+  const { errors } = useSelector(
+    (state: { postState: postsState }) => state.postState
   );
 
   const [formState, setFormData] = useState<postInterface>({
@@ -69,56 +75,64 @@ const PostForm = () => {
     dispatch(createPost(form));
   };
 
+  useEffect(() => {
+    if (errors.length > 0) {
+      errors.forEach((error) => toast.error(error.msg));
+    }
+  }, [errors]);
   return (
-    <div className="post-form">
-      <PostModalProfile />
-      <Form onSubmit={submitFormHandler}>
-        <Form.Group>
-          <textarea
-            className="w-100"
-            rows={3}
-            placeholder={`What's on your mind, ${user?.firstName}.?`}
-            name="body"
-            onChange={bodyChangeHandler}
-          />
-        </Form.Group>
-        <Form.Group className="my-3">
-          {formState.imagePreview && (
-            <img className="img-fluid" src={formState.imagePreview} alt="" />
-          )}
-        </Form.Group>
+    <>
+      <Toaster position="top-right" reverseOrder={false} />
+      <div className="post-form">
+        <PostModalProfile />
+        <Form onSubmit={submitFormHandler}>
+          <Form.Group>
+            <textarea
+              className="w-100"
+              rows={3}
+              placeholder={`What's on your mind, ${user?.firstName}.?`}
+              name="body"
+              onChange={bodyChangeHandler}
+            />
+          </Form.Group>
+          <Form.Group className="my-3">
+            {formState.imagePreview && (
+              <img className="img-fluid" src={formState.imagePreview} alt="" />
+            )}
+          </Form.Group>
 
-        <Form.Group>
-          <div className="border rounded px-2 py-2 d-flex justify-content-between px-3">
-            <div>
-              <span>Add To Your Post</span>
+          <Form.Group>
+            <div className="border rounded px-2 py-2 d-flex justify-content-between px-3">
+              <div>
+                <span>Add To Your Post</span>
+              </div>
+              <div>
+                <label
+                  htmlFor="image-upload"
+                  className="pointer-event"
+                  role="button"
+                >
+                  <img src={ImageUploadIcon} alt="" />
+                  <Form.Control
+                    onChange={imageChangeHandler}
+                    type="file"
+                    className="d-none"
+                    id="image-upload"
+                    name="image"
+                  />
+                </label>
+              </div>
             </div>
-            <div>
-              <label
-                htmlFor="image-upload"
-                className="pointer-event"
-                role="button"
-              >
-                <img src={ImageUploadIcon} alt="" />
-                <Form.Control
-                  onChange={imageChangeHandler}
-                  type="file"
-                  className="d-none"
-                  id="image-upload"
-                  name="image"
-                />
-              </label>
-            </div>
-          </div>
-        </Form.Group>
+          </Form.Group>
 
-        <Form.Group className="my-2 d-grid">
-          <Button type="submit" disabled={hidePostButton}>
-            Post
-          </Button>
-        </Form.Group>
-      </Form>
-    </div>
+          <Form.Group className="my-2 d-grid">
+            <Button type="submit" disabled={hidePostButton}>
+              Post
+            </Button>
+          </Form.Group>
+        </Form>
+      </div>
+    </>
   );
 };
 
