@@ -1,6 +1,9 @@
-export interface postInterface {
+export interface postForm {
   body: string;
   image: File | undefined;
+}
+
+export interface postInterface extends postForm {
   imagePreview: string | undefined;
 }
 
