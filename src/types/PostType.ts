@@ -6,5 +6,6 @@ export default interface PostInterface {
   likes: string[];
   comments: { comment: string; userId: string }[];
   save: () => void;
+  populate: () => void;
   // eslint-disable-next-line semi
 }

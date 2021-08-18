@@ -41,7 +41,7 @@ export const createPost = (req: Request, res: Response) => {
       }
 
       // creating post
-      const newPost: PostInterface = new Post({
+      const newPost = new Post({
         user: user._id,
         body,
         likes: [],
@@ -71,6 +71,12 @@ export const createPost = (req: Request, res: Response) => {
       user.posts.push(newPost._id);
       user.save();
       newPost.save();
+
+      // attaching user with post
+      await newPost
+        .populate('user', 'firstName lastName profileImage _id')
+        .execPopulate();
+
       return res.status(201).json({ post: newPost, msg: 'New post created.' });
     } catch (error) {
       return res.send(error);
