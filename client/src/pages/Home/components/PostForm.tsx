@@ -50,12 +50,20 @@ const PostForm = () => {
     }
   };
 
-  console.log(formState);
+  const submitFormHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const { body, image } = formState;
+
+    const form = new FormData();
+    form.append('body', body);
+    form.append('image', image!);
+  };
 
   return (
     <div className="post-form">
       <PostModalProfile />
-      <Form>
+      <Form onSubmit={submitFormHandler}>
         <Form.Group>
           <textarea
             className="w-100"
