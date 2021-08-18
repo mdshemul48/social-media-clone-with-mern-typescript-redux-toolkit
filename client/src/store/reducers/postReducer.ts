@@ -20,6 +20,14 @@ const reducers = {
     const post = action.payload;
     state.posts.push(post);
     return state;
+  },
+  setErrors(state: postsState, action: PayloadAction<{ msg: string }[]>) {
+    state.errors = action.payload;
+    return state;
+  },
+  clearErrors(state: postsState) {
+    state.errors = [];
+    return state;
   }
 };
 
