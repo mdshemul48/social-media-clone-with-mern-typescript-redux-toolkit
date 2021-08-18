@@ -1,6 +1,5 @@
 import axios from '../../config/axios';
 
-import { postForm } from '../../types/postInterface';
 import { stateInterface } from '../../types/stateInterface';
 import { post } from '../../types/postInterface';
 import { AppDispatch } from '../index';
@@ -25,7 +24,8 @@ export const createPost = (formState: FormData) => {
         formState,
         config
       );
-      console.log(data);
+      dispatch(setPost(data.post));
+      console.log(data.post);
     } catch (error) {
       console.log(error);
     }

@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+// types
+import { post } from '../../types/postInterface';
 import { postsState } from '../../types/postInterface';
 const initialState: postsState = {
   errors: [],
@@ -9,7 +11,14 @@ const initialState: postsState = {
 };
 
 const reducers = {
-  setPost(state: postsState, action: PayloadAction) {
+  setPosts(state: postsState, action: PayloadAction<post[]>) {
+    const posts = action.payload;
+    state.posts = posts;
+    return state;
+  },
+  setPost(state: postsState, action: PayloadAction<post>) {
+    const post = action.payload;
+    state.posts.push(post);
     return state;
   }
 };
