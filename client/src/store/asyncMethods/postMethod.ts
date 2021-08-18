@@ -20,7 +20,7 @@ export const createPost = (formState: FormData) => {
       };
 
       const { data }: { data: { msg: string; post: post } } = await axios.post(
-        '/post',
+        '/posts',
         formState,
         config
       );
