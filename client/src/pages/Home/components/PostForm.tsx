@@ -3,6 +3,8 @@ import { Form, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { UserReducer } from '../../../types/userReducer';
+import postInterface from '../../../types/postInterface';
+
 import PostModalProfile from './PostModalProfile';
 
 import ImageUploadIcon from '../../../assets/image-icon.png';
@@ -11,22 +13,24 @@ const PostForm = () => {
     (state: { userState: UserReducer }) => state.userState
   );
 
-  const [formState, setFormData] = useState({
+  const [formState, setFormData] = useState<postInterface>({
     body: '',
     image: undefined
   });
 
   const [hidePostButton, setHidePostButton] = useState(true);
 
-  const imageChangeHandler = (event: React.FormEvent<HTMLInputElement>) => {};
+  const imageChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      const image = event.target.files[0];
+    }
+  };
   const bodyChangeHandler = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ): void => {
     const bodyValue = event.target.value;
     setFormData((prevState) => ({ ...prevState, body: bodyValue }));
     if (formState.body.length > 0) {
-      console.log(hidePostButton);
-
       setHidePostButton(false);
     }
   };
@@ -56,6 +60,7 @@ const PostForm = () => {
               >
                 <img src={ImageUploadIcon} alt="" />
                 <Form.Control
+                  onChange={imageChangeHandler}
                   type="file"
                   className="d-none"
                   id="image-upload"
