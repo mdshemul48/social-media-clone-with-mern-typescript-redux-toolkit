@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userState from './reducers/authReducer';
 
-const store = configureStore({ reducer: { userState } });
+import userState from './reducers/authReducer';
+import postState from './reducers/postReducer';
+
+const store = configureStore({ reducer: { userState, postState } });
 
 // dispatch type
 export type AppDispatch = typeof store.dispatch;
