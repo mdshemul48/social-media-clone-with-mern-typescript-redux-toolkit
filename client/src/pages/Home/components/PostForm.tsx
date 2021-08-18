@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
+// async methods
+import { createPost } from '../../../store/asyncMethods/postMethod';
+// types
 import { UserReducer } from '../../../types/userReducer';
 import { postInterface } from '../../../types/postInterface';
 
+// components
 import PostModalProfile from './PostModalProfile';
 
+// assets
 import ImageUploadIcon from '../../../assets/image-icon.png';
 const PostForm = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector(
     (state: { userState: UserReducer }) => state.userState
   );
@@ -58,6 +65,8 @@ const PostForm = () => {
     const form = new FormData();
     form.append('body', body);
     form.append('image', image!);
+
+    dispatch(createPost(form));
   };
 
   return (

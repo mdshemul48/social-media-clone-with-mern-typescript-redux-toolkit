@@ -7,19 +7,19 @@ import { AppDispatch } from '../index';
 
 import { setPost } from '../reducers/postReducer';
 
-export const createPost = (formState: postForm) => {
-  return async (dispatch: AppDispatch, state: stateInterface) => {
-    const {
-      userState: { token }
-    } = state;
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    };
-
+export const createPost = (formState: FormData) => {
+  return async (dispatch: AppDispatch, getState: () => stateInterface) => {
     try {
+      const {
+        userState: { token }
+      } = getState();
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+
       const { data }: { data: { msg: string; post: post } } = await axios.post(
         '/post',
         formState,
