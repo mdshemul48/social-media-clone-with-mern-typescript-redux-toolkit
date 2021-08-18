@@ -9,6 +9,7 @@ import ImageInfo from '../types/uploadedImage';
 // db model
 import User from '../model/userModel';
 import Post from '../model/postModel';
+
 import saveImage from '../util/saveImage';
 
 export const createPost = (req: Request, res: Response) => {
@@ -77,4 +78,11 @@ export const createPost = (req: Request, res: Response) => {
   });
 };
 
-export const getPosts = (req: Request, res: Response) => {};
+export const getPosts = async (req: Request, res: Response) => {
+  try {
+    const posts = await Post.find({}).sort({ updatedAt: -1 });
+    return res.status(200).json({ posts });
+  } catch (error: any) {
+    return res.status(500).json({ error: [{ msg: error?.message }] });
+  }
+};
