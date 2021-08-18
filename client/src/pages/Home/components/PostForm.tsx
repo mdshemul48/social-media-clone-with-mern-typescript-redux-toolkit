@@ -15,7 +15,8 @@ const PostForm = () => {
 
   const [formState, setFormData] = useState<postInterface>({
     body: '',
-    image: undefined
+    image: undefined,
+    imagePreview: undefined
   });
 
   const [hidePostButton, setHidePostButton] = useState(true);
@@ -23,6 +24,20 @@ const PostForm = () => {
   const imageChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const image = event.target.files[0];
+
+      const fileReader = new FileReader();
+
+      fileReader.onloadend = (event: ProgressEvent<FileReader>) => {
+        const imageUrl = event.target?.result;
+        if (imageUrl) {
+          setFormData((prevState) => ({
+            ...prevState,
+            image,
+            imagePreview: imageUrl
+          }));
+        }
+      };
+      fileReader.readAsDataURL(image);
     }
   };
   const bodyChangeHandler = (
@@ -34,6 +49,9 @@ const PostForm = () => {
       setHidePostButton(false);
     }
   };
+
+  console.log(formState);
+
   return (
     <div className="post-form">
       <PostModalProfile />
