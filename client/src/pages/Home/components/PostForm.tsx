@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { UserReducer } from '../../../types/userReducer';
-import postInterface from '../../../types/postInterface';
+import { postInterface } from '../../../types/postInterface';
 
 import PostModalProfile from './PostModalProfile';
 
