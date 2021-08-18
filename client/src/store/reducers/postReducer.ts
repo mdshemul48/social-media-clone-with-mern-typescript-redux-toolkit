@@ -39,4 +39,4 @@ const postSlice = createSlice({
 
 export default postSlice.reducer;
 
-export const { setPost } = postSlice.actions;
+export const { setPost, setPosts, setErrors, clearErrors } = postSlice.actions;

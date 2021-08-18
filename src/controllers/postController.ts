@@ -4,11 +4,11 @@ import { v4 as uuid } from 'uuid';
 
 // ts interface
 import { UserInterface } from '../types/user';
-import PostInterface from '../types/PostType';
 import ImageInfo from '../types/uploadedImage';
 // db model
 import User from '../model/userModel';
 import Post from '../model/postModel';
+
 import saveImage from '../util/saveImage';
 
 export const createPost = (req: Request, res: Response) => {
@@ -40,7 +40,7 @@ export const createPost = (req: Request, res: Response) => {
       }
 
       // creating post
-      const newPost: PostInterface = new Post({
+      const newPost = new Post({
         user: user._id,
         body,
         likes: [],
@@ -70,6 +70,12 @@ export const createPost = (req: Request, res: Response) => {
       user.posts.push(newPost._id);
       user.save();
       newPost.save();
+
+      // attaching user with post
+      await newPost
+        .populate('user', 'firstName lastName profileImage _id')
+        .execPopulate();
+
       return res.status(201).json({ post: newPost, msg: 'New post created.' });
     } catch (error) {
       return res.send(error);
@@ -77,4 +83,13 @@ export const createPost = (req: Request, res: Response) => {
   });
 };
 
-export const getPosts = (req: Request, res: Response) => {};
+export const getPosts = async (req: Request, res: Response) => {
+  try {
+    const posts = await Post.find({})
+      .sort({ updatedAt: -1 })
+      .populate('user', 'firstName lastName profileImage _id');
+    return res.status(200).json({ posts });
+  } catch (error: any) {
+    return res.status(500).json({ error: [{ msg: error?.message }] });
+  }
+};
