@@ -28,7 +28,7 @@ const PostProfile: React.FC<postProfile> = (props) => {
           <span className="d-block">
             {firstName} {lastName}
           </span>
-          <span className="text-dark post-day me-1">{postCreatedTime}</span>
+          <span className="text-dark post-day me-2">{postCreatedTime}</span>
           <span>
             <GiEarthAmerica />
           </span>
