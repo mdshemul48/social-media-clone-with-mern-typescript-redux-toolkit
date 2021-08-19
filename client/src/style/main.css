@@ -18,3 +18,4 @@ body {
 @import url(./components/shared/navbar.css);
 @import url(./components/home/postCreator.css);
 @import url(./components/home/postModal.css);
+@import url(./components/home/post.css);

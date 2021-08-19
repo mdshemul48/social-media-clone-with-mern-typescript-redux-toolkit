@@ -16,7 +16,7 @@ const PostProfile: React.FC = (props) => {
         </div>
         <div className="ms-2">
           <span className="d-block">MD. Shimul</span>
-          <span></span>
+          <span className="text-dark post-day me-1">1day ago</span>
           <span>
             <GiEarthAmerica />
           </span>
