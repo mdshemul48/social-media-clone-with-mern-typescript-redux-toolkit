@@ -5,7 +5,7 @@ import { GiEarthAmerica } from 'react-icons/gi';
 const PostProfile: React.FC = (props) => {
   return (
     <div>
-      <div className="d-flex p-2">
+      <div className="d-flex px-2 pt-2">
         <div className="mt-1">
           <img
             width="40px"
