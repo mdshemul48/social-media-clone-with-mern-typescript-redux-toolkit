@@ -15,8 +15,6 @@ const LoginForm = () => {
     setFormState((PrevState) => ({ ...PrevState, [name]: value }));
   };
   const loginSubmitHandler = (event: FormEvent) => {
-    console.log('gg');
-
     event.preventDefault();
 
     dispatch(login(formState));

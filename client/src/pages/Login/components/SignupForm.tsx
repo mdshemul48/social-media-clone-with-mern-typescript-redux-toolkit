@@ -41,7 +41,6 @@ const SignupForm = () => {
   const fileHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target!.files!;
     if (files!.length !== 0) {
-      console.log(files[0]);
       const imageReader = new FileReader();
       imageReader.onloadend = () => {
         setFormState((prevState) => ({
@@ -54,7 +53,6 @@ const SignupForm = () => {
     }
   };
 
-  console.log(formState);
   return (
     <Form onSubmit={signupFormHandler}>
       {formState.imagePreview && (

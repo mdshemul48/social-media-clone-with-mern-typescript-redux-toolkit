@@ -28,6 +28,14 @@ const reducers = {
   clearErrors(state: postsState) {
     state.errors = [];
     return state;
+  },
+  redirect(state: postsState) {
+    state.redirect = true;
+    return state;
+  },
+  resetRedirect(state: postsState) {
+    state.redirect = false;
+    return state;
   }
 };
 
@@ -39,4 +47,11 @@ const postSlice = createSlice({
 
 export default postSlice.reducer;
 
-export const { setPost, setPosts, setErrors, clearErrors } = postSlice.actions;
+export const {
+  setPost,
+  setPosts,
+  setErrors,
+  clearErrors,
+  redirect,
+  resetRedirect
+} = postSlice.actions;
