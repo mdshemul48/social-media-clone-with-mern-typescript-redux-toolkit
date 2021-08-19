@@ -5,6 +5,9 @@ const Posts = () => {
   return (
     <div className="mt-3">
       <Post />
+      <Post />
+      <Post />
+      <Post />
     </div>
   );
 };

@@ -29,10 +29,16 @@ const Post = () => {
         </div>
         <hr className="my-1" />
         <div className="d-flex justify-content-around py-1">
-          <span role="button" className="d-flex align-items-center">
+          <span
+            role="button"
+            className="d-flex align-items-center text-secondary"
+          >
             <AiOutlineLike className="me-1" /> Like
           </span>
-          <span role="button" className="d-flex align-items-center">
+          <span
+            role="button"
+            className="d-flex align-items-center text-secondary"
+          >
             <FaRegCommentAlt className="me-1" /> Comment
           </span>
         </div>
