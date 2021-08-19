@@ -37,7 +37,7 @@ const Post: React.FC<{ post: post }> = (props) => {
       {image && (
         <div>
           <img
-            className="img-fluid"
+            className="w-100 h-auto"
             src={process.env.REACT_APP_BACKEND_API_LINK + '/public/' + image}
             alt=""
           />
