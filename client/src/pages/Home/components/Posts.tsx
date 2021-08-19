@@ -11,7 +11,7 @@ const Posts = () => {
   return (
     <div className="mt-3">
       {posts.map((post) => {
-        return <Post post={post} />;
+        return <Post post={post} key={post._id} />;
       })}
     </div>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import moment from 'moment';
 //component
 import PostProfile from './PostProfile';
 
@@ -19,9 +19,11 @@ const Post: React.FC<{ post: post }> = (props) => {
     image,
     likes,
     comments,
-
+    createdAt,
     user: { firstName, lastName, profileImage }
   } = props.post;
+
+  const createdTime = moment(createdAt).fromNow();
 
   return (
     <div className="bg-light shadow-sm rounded mb-2">
@@ -29,6 +31,7 @@ const Post: React.FC<{ post: post }> = (props) => {
         firstName={firstName}
         lastName={lastName}
         profileImage={profileImage}
+        postCreatedTime={createdTime}
       />
       <p className="mx-2 my-1">{body}</p>
       {image && (

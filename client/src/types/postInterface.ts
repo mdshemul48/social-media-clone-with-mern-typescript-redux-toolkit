@@ -13,6 +13,7 @@ export interface post {
   image: string | undefined;
   likes: string[];
   comments: { comment: string; userId: string }[];
+  createdAt: string;
   user: {
     _id: string;
     firstName: string;

@@ -6,10 +6,11 @@ interface postProfile {
   firstName: string;
   lastName: string;
   profileImage: string;
+  postCreatedTime: string;
 }
 
 const PostProfile: React.FC<postProfile> = (props) => {
-  const { firstName, lastName, profileImage } = props;
+  const { firstName, lastName, profileImage, postCreatedTime } = props;
   return (
     <div>
       <div className="d-flex px-2 pt-2">
@@ -27,7 +28,7 @@ const PostProfile: React.FC<postProfile> = (props) => {
           <span className="d-block">
             {firstName} {lastName}
           </span>
-          <span className="text-dark post-day me-1">1day ago</span>
+          <span className="text-dark post-day me-1">{postCreatedTime}</span>
           <span>
             <GiEarthAmerica />
           </span>
