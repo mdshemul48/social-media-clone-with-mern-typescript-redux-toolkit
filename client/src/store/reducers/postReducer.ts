@@ -28,6 +28,14 @@ const reducers = {
   clearErrors(state: postsState) {
     state.errors = [];
     return state;
+  },
+  redirect(state: postsState) {
+    state.redirect = true;
+    return state;
+  },
+  resetRedirect(state: postsState) {
+    state.redirect = false;
+    return state;
   }
 };
 
