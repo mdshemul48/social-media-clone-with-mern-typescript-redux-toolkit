@@ -1,13 +1,18 @@
 import React from 'react';
-
+import { useSelector } from 'react-redux';
 import Post from './Post';
+
+// types
+import { stateInterface } from '../../../types/stateInterface';
+
 const Posts = () => {
+  const { posts } = useSelector((state: stateInterface) => state.postState);
+
   return (
     <div className="mt-3">
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      {posts.map((post) => {
+        return <Post post={post} key={post._id} />;
+      })}
     </div>
   );
 };

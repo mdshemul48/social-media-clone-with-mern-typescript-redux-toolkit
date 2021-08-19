@@ -8,7 +8,8 @@ import {
   setPost,
   setErrors,
   clearErrors,
-  redirect
+  redirect,
+  setPosts
 } from '../reducers/postReducer';
 
 export const createPost = (formState: FormData) => {
@@ -32,6 +33,34 @@ export const createPost = (formState: FormData) => {
       dispatch(setPost(data.post));
       dispatch(clearErrors());
       dispatch(redirect());
+    } catch (error: any) {
+      const {
+        data: { errors }
+      } = error?.response;
+      dispatch(setErrors(errors));
+    }
+  };
+};
+
+export const fetchAllPosts = () => {
+  return async (dispatch: AppDispatch, getState: () => stateInterface) => {
+    try {
+      const {
+        userState: { token }
+      } = getState();
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+
+      const { data }: { data: { posts: post[] } } = await axios.get(
+        '/posts',
+        config
+      );
+      dispatch(setPosts(data.posts));
+      dispatch(clearErrors());
     } catch (error: any) {
       const {
         data: { errors }

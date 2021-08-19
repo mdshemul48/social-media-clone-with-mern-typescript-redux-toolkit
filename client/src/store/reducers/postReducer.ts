@@ -18,7 +18,7 @@ const reducers = {
   },
   setPost(state: postsState, action: PayloadAction<post>) {
     const post = action.payload;
-    state.posts.push(post);
+    state.posts.unshift(post);
     return state;
   },
   setErrors(state: postsState, action: PayloadAction<{ msg: string }[]>) {
