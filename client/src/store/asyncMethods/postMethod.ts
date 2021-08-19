@@ -30,7 +30,6 @@ export const createPost = (formState: FormData) => {
       const {
         data: { errors }
       } = error?.response;
-
       dispatch(setErrors(errors));
     }
   };
