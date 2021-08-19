@@ -4,7 +4,12 @@ import { stateInterface } from '../../types/stateInterface';
 import { post } from '../../types/postInterface';
 import { AppDispatch } from '../index';
 
-import { setPost, setErrors, clearErrors } from '../reducers/postReducer';
+import {
+  setPost,
+  setErrors,
+  clearErrors,
+  redirect
+} from '../reducers/postReducer';
 
 export const createPost = (formState: FormData) => {
   return async (dispatch: AppDispatch, getState: () => stateInterface) => {
@@ -26,6 +31,7 @@ export const createPost = (formState: FormData) => {
       );
       dispatch(setPost(data.post));
       dispatch(clearErrors());
+      dispatch(redirect());
     } catch (error: any) {
       const {
         data: { errors }
