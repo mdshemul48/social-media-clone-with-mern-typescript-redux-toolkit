@@ -1,8 +1,13 @@
 import PostProfile from './PostProfile';
 
+// icons
+import { AiOutlineLike } from 'react-icons/ai';
+import { FaRegCommentAlt } from 'react-icons/fa';
+// assets
+import likeImage from '../../../assets/like.svg';
 const Post = () => {
   return (
-    <div className="bg-light shadow-sm rounded">
+    <div className="bg-light shadow-sm rounded mb-2">
       <PostProfile />
       <p className="mx-2 my-1">hello world this is good.</p>
       <div>
@@ -15,8 +20,22 @@ const Post = () => {
 
       <hr className="my-1" />
       <div className="mx-2">
-        <span>you, and 500 others</span>
-        <div></div>
+        <div className="d-flex justify-content-between">
+          <div>
+            <img src={likeImage} width="16" alt="" />{' '}
+            <span>you, and 500 others</span>
+          </div>
+          <span>4 comments</span>
+        </div>
+        <hr className="my-1" />
+        <div className="d-flex justify-content-around py-1">
+          <span role="button" className="d-flex align-items-center">
+            <AiOutlineLike className="me-1" /> Like
+          </span>
+          <span role="button" className="d-flex align-items-center">
+            <FaRegCommentAlt className="me-1" /> Comment
+          </span>
+        </div>
       </div>
     </div>
   );
