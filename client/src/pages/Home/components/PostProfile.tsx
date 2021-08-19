@@ -2,7 +2,11 @@ import React from 'react';
 
 import { GiEarthAmerica } from 'react-icons/gi';
 
-const PostProfile: React.FC = (props) => {
+const PostProfile: React.FC<{
+  firstName: string;
+  lastName: string;
+  profileImage: string;
+}> = (props) => {
   return (
     <div>
       <div className="d-flex px-2 pt-2">

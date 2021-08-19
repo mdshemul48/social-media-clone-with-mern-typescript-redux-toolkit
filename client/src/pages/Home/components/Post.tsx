@@ -1,19 +1,39 @@
+import React from 'react';
+
+//component
 import PostProfile from './PostProfile';
 
 // icons
 import { AiOutlineLike } from 'react-icons/ai';
 import { FaRegCommentAlt } from 'react-icons/fa';
+
 // assets
 import likeImage from '../../../assets/like.svg';
-const Post = () => {
+
+// types
+import { post } from '../../../types/postInterface';
+
+const Post: React.FC<post> = (props) => {
+  const {
+    body,
+    image,
+    likes,
+    comments,
+    user: { firstName, lastName, profileImage }
+  } = props;
+
   return (
     <div className="bg-light shadow-sm rounded mb-2">
-      <PostProfile />
-      <p className="mx-2 my-1">hello world this is good.</p>
+      <PostProfile
+        firstName={firstName}
+        lastName={lastName}
+        profileImage={profileImage}
+      />
+      <p className="mx-2 my-1">{body}</p>
       <div>
         <img
           className="img-fluid"
-          src="http://localhost:5000/public/96257fa5-9de1-46c1-828c-e93a712ce8b2.jpeg"
+          src={process.env.REACT_APP_BACKEND_API_LINK + '/public' + image}
           alt=""
         />
       </div>
@@ -22,10 +42,14 @@ const Post = () => {
       <div className="mx-2">
         <div className="d-flex justify-content-between">
           <div>
-            <img src={likeImage} width="16" alt="" />{' '}
-            <span>you, and 500 others</span>
+            {likes.length > 0 && (
+              <>
+                <img src={likeImage} width="16" alt="" />
+                <span>{likes.length} Likes</span>
+              </>
+            )}
           </div>
-          <span>4 comments</span>
+          {comments.length > 0 && <span>{comments.length} Comment</span>}
         </div>
         <hr className="my-1" />
         <div className="d-flex justify-content-around py-1">
