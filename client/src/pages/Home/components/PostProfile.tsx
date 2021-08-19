@@ -2,24 +2,31 @@ import React from 'react';
 
 import { GiEarthAmerica } from 'react-icons/gi';
 
-const PostProfile: React.FC<{
+interface postProfile {
   firstName: string;
   lastName: string;
   profileImage: string;
-}> = (props) => {
+}
+
+const PostProfile: React.FC<postProfile> = (props) => {
+  const { firstName, lastName, profileImage } = props;
   return (
     <div>
       <div className="d-flex px-2 pt-2">
         <div className="mt-1">
           <img
             width="40px"
-            src="http://localhost:5000/public/e8a0d7cb-4aea-445f-833d-3e61f1079309.jpeg"
+            src={
+              process.env.REACT_APP_BACKEND_API_LINK + '/public/' + profileImage
+            }
             alt=""
             className="rounded-circle"
           />
         </div>
         <div className="ms-2">
-          <span className="d-block">MD. Shimul</span>
+          <span className="d-block">
+            {firstName} {lastName}
+          </span>
           <span className="text-dark post-day me-1">1day ago</span>
           <span>
             <GiEarthAmerica />
