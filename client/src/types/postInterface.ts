@@ -9,11 +9,16 @@ export interface postInterface extends postForm {
 
 export interface post {
   _id: string;
-  user: string;
   body: string;
-  image: string;
+  image: string | undefined;
   likes: string[];
   comments: { comment: string; userId: string }[];
+  user: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    profileImage: string;
+  };
 }
 
 export interface postsState {
