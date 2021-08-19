@@ -13,14 +13,15 @@ import likeImage from '../../../assets/like.svg';
 // types
 import { post } from '../../../types/postInterface';
 
-const Post: React.FC<post> = (props) => {
+const Post: React.FC<{ post: post }> = (props) => {
   const {
     body,
     image,
     likes,
     comments,
+
     user: { firstName, lastName, profileImage }
-  } = props;
+  } = props.post;
 
   return (
     <div className="bg-light shadow-sm rounded mb-2">
@@ -30,15 +31,17 @@ const Post: React.FC<post> = (props) => {
         profileImage={profileImage}
       />
       <p className="mx-2 my-1">{body}</p>
-      <div>
-        <img
-          className="img-fluid"
-          src={process.env.REACT_APP_BACKEND_API_LINK + '/public' + image}
-          alt=""
-        />
-      </div>
+      {image && (
+        <div>
+          <img
+            className="img-fluid"
+            src={process.env.REACT_APP_BACKEND_API_LINK + '/public/' + image}
+            alt=""
+          />
+        </div>
+      )}
 
-      <hr className="my-1" />
+      {comments.length > 0 || (likes.length > 0 && <hr className="my-1" />)}
       <div className="mx-2">
         <div className="d-flex justify-content-between">
           <div>
