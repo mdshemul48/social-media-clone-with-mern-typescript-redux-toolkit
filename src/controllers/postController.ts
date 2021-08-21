@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import formidable from 'formidable';
 import { v4 as uuid } from 'uuid';
+import { body } from 'express-validator';
 
 // ts interface
 import { UserInterface } from '../types/user';
@@ -120,14 +121,24 @@ export const like = async (req: Request, res: Response) => {
   }
 };
 
+export const createCommentValidator = [
+  body('postId').notEmpty().withMessage('postId not provided.'),
+  body('body').notEmpty().withMessage('body not provided'),
+  body('userId').notEmpty().withMessage('userId not provided')
+];
+
 export const createComment = (req: Request, res: Response) => {
   const {
     postId,
     body,
     userId
   }: { postId: string; body: string; userId: string } = req.body;
+  console.log(postId, body, userId);
 
   try {
     const post = Post.findOne({ _id: postId });
-  } catch (error) {}
+    return res.send('gg');
+  } catch (error: any) {
+    return res.status(500).json({ errors: [{ msg: error.message }] });
+  }
 };
