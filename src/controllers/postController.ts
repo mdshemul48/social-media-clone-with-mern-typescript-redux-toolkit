@@ -10,6 +10,7 @@ import User from '../model/userModel';
 import Post from '../model/postModel';
 
 import saveImage from '../util/saveImage';
+import PostInterface from '../types/PostType';
 
 export const createPost = (req: Request, res: Response) => {
   const form = formidable({ multiples: true });
@@ -91,5 +92,30 @@ export const getPosts = async (req: Request, res: Response) => {
     return res.status(200).json({ posts });
   } catch (error: any) {
     return res.status(500).json({ error: [{ msg: error?.message }] });
+  }
+};
+
+export const like = async (req: Request, res: Response) => {
+  const { postId } = <{ postId: string }>req.params;
+  const { userId }: { userId: string } = req.body;
+  if (!postId) {
+    return res.status(400).json({ errors: [{ msg: 'post id not provided.' }] });
+  }
+  try {
+    const post: PostInterface = await Post.findOne({ _id: postId });
+    const { likes } = post;
+    const isLikedIndex = likes.indexOf(userId);
+
+    if (isLikedIndex === -1) {
+      post.likes.push(userId);
+    } else {
+      post.likes.splice(isLikedIndex, 1);
+    }
+
+    post.save();
+    return res.send(post);
+  } catch (error: any) {
+    const errorMessage = error.message;
+    return res.status(500).json({ errors: [{ msg: errorMessage }] });
   }
 };
