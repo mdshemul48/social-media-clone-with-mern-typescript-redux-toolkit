@@ -141,7 +141,7 @@ export const createComment = async (req: Request, res: Response) => {
       userId
     });
     post.save();
-    return res.send(post);
+    return res.status(201).json({ msg: 'comment added to the post.' });
   } catch (error: any) {
     return res.status(500).json({ errors: [{ msg: error.message }] });
   }
