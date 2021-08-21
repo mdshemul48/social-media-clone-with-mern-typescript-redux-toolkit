@@ -133,7 +133,6 @@ export const createComment = (req: Request, res: Response) => {
     comment,
     userId
   }: { postId: string; comment: string; userId: string } = req.body;
-  console.log(postId, body, userId);
 
   try {
     const post: PostInterface = Post.findOne({ _id: postId });
