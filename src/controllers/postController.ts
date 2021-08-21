@@ -123,20 +123,25 @@ export const like = async (req: Request, res: Response) => {
 
 export const createCommentValidator = [
   body('postId').notEmpty().withMessage('postId not provided.'),
-  body('body').notEmpty().withMessage('body not provided'),
+  body('comment').notEmpty().withMessage('body not provided'),
   body('userId').notEmpty().withMessage('userId not provided')
 ];
 
 export const createComment = (req: Request, res: Response) => {
   const {
     postId,
-    body,
+    comment,
     userId
-  }: { postId: string; body: string; userId: string } = req.body;
+  }: { postId: string; comment: string; userId: string } = req.body;
   console.log(postId, body, userId);
 
   try {
-    const post = Post.findOne({ _id: postId });
+    const post: PostInterface = Post.findOne({ _id: postId });
+    post.comments.push({
+      comment,
+      userId
+    });
+    post.save();
     return res.send('gg');
   } catch (error: any) {
     return res.status(500).json({ errors: [{ msg: error.message }] });
