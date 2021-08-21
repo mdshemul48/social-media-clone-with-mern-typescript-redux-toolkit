@@ -127,7 +127,7 @@ export const createCommentValidator = [
   body('userId').notEmpty().withMessage('userId not provided')
 ];
 
-export const createComment = (req: Request, res: Response) => {
+export const createComment = async (req: Request, res: Response) => {
   const {
     postId,
     comment,
@@ -135,13 +135,13 @@ export const createComment = (req: Request, res: Response) => {
   }: { postId: string; comment: string; userId: string } = req.body;
 
   try {
-    const post: PostInterface = Post.findOne({ _id: postId });
+    const post: PostInterface = await Post.findOne({ _id: postId });
     post.comments.push({
       comment,
       userId
     });
     post.save();
-    return res.send('gg');
+    return res.send(post);
   } catch (error: any) {
     return res.status(500).json({ errors: [{ msg: error.message }] });
   }
