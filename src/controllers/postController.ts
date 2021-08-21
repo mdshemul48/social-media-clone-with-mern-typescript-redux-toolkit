@@ -119,3 +119,15 @@ export const like = async (req: Request, res: Response) => {
     return res.status(500).json({ errors: [{ msg: errorMessage }] });
   }
 };
+
+export const createComment = (req: Request, res: Response) => {
+  const {
+    postId,
+    body,
+    userId
+  }: { postId: string; body: string; userId: string } = req.body;
+
+  try {
+    const post = Post.findOne({ _id: postId });
+  } catch (error) {}
+};
