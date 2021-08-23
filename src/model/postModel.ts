@@ -21,7 +21,7 @@ const postSchema = new Schema(
     ],
     comments: [
       {
-        comment: {
+        body: {
           type: String,
           required: true
         },
