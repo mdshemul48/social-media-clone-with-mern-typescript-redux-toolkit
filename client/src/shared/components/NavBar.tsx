@@ -10,7 +10,7 @@ import { AiFillHome, AiFillShop } from 'react-icons/ai';
 import { FaUserFriends } from 'react-icons/fa';
 import { MdOndemandVideo } from 'react-icons/md';
 import { RiGroup2Line } from 'react-icons/ri';
-import { AiOutlineLogout } from 'react-icons/ai';
+import { FiLogOut } from 'react-icons/fi';
 const NavBar = () => {
   const dispatch = useDispatch();
   const logoutHandler = () => {
@@ -42,7 +42,7 @@ const NavBar = () => {
             </NavLink>
           </Nav>
           <Nav className="nav-bar__icons">
-            <AiOutlineLogout onClick={logoutHandler} />
+            <FiLogOut onClick={logoutHandler} />
           </Nav>
         </Navbar.Collapse>
       </Container>
