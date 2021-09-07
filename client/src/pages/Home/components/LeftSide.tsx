@@ -1,7 +1,10 @@
 import React from 'react';
 
 const LeftSide = () => {
-  return <div>hello world</div>;
+  return <div>
+      
+      
+  </div>;
 };
 
 export default LeftSide;
