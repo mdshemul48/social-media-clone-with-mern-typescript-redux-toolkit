@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
 //component
 import PostProfile from './PostProfile';
 
@@ -15,6 +16,7 @@ import { post } from '../../../types/postInterface';
 
 const Post: React.FC<{ post: post }> = (props) => {
   const {
+    _id,
     body,
     image,
     likes,
@@ -24,6 +26,8 @@ const Post: React.FC<{ post: post }> = (props) => {
   } = props.post;
 
   const createdTime = moment(createdAt).fromNow();
+
+  const likeClickHandler = (_: MouseEvent) => {};
 
   return (
     <div className="bg-light shadow-sm rounded mb-2">

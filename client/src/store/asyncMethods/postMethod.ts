@@ -71,11 +71,25 @@ export const fetchAllPosts = () => {
 };
 
 export const like = (post_id: string) => {
-  return (dispatch: AppDispatch, getState: () => stateInterface) => {
+  return async (dispatch: AppDispatch, getState: () => stateInterface) => {
     const { userState } = getState();
     const { token } = userState;
     if (!token) {
-      dispatch(setErrors([{ msg: 'token not found' }]));
+      return dispatch(setErrors([{ msg: 'token not found' }]));
     }
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    };
+    try {
+      const { data } = await axios.put<{ data: { msg: string; post: post } }>(
+        `/posts/like/${post_id}`,
+        null,
+        config
+      );
+      
+      console.log(data);
+    } catch (error) {}
   };
 };
