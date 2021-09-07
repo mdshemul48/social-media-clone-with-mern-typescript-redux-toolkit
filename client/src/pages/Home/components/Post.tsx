@@ -14,7 +14,10 @@ import likeImage from '../../../assets/like.svg';
 // types
 import { post } from '../../../types/postInterface';
 
+// methods
+import { like } from '../../../store/asyncMethods/postMethod';
 const Post: React.FC<{ post: post }> = (props) => {
+  const dispatch = useDispatch();
   const {
     _id,
     body,
@@ -27,7 +30,9 @@ const Post: React.FC<{ post: post }> = (props) => {
 
   const createdTime = moment(createdAt).fromNow();
 
-  const likeClickHandler = (_: MouseEvent) => {};
+  const likeClickHandler = (_: MouseEvent) => {
+    dispatch(like(_id));
+  };
 
   return (
     <div className="bg-light shadow-sm rounded mb-2">
@@ -64,6 +69,7 @@ const Post: React.FC<{ post: post }> = (props) => {
         <hr className="my-1" />
         <div className="d-flex justify-content-around py-1">
           <span
+            onClick={likeClickHandler}
             role="button"
             className="d-flex align-items-center text-secondary"
           >

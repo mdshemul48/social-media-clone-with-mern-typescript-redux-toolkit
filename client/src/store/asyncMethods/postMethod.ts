@@ -88,8 +88,10 @@ export const like = (post_id: string) => {
         null,
         config
       );
-      
+
       console.log(data);
-    } catch (error) {}
+    } catch (error: any) {
+      console.log(error.response);
+    }
   };
 };
