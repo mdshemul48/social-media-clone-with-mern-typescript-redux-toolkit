@@ -91,7 +91,7 @@ export const signup = async (req: Request, res: Response) => {
       const hashedPassword = await bcrypt.hash(password, salt);
 
       // creating new user
-      const newUser: UserInterface = await User.create({
+      const newUser = await User.create({
         firstName,
         lastName,
         email,

@@ -36,6 +36,21 @@ const reducers = {
   resetRedirect(state: postsState) {
     state.redirect = false;
     return state;
+  },
+
+  setPostLike(
+    state: postsState,
+    action: { payload: { userId: string; postId: string } }
+  ) {
+    const { userId, postId } = action.payload;
+    const postIndex = state.posts.findIndex((post) => post._id === postId);
+    const likeIndex = state.posts[postIndex].likes.indexOf(userId);
+    if (likeIndex !== -1) {
+      state.posts[postIndex].likes.splice(likeIndex, 1);
+    } else {
+      state.posts[postIndex].likes.push(userId);
+    }
+    return state;
   }
 };
 
@@ -53,5 +68,6 @@ export const {
   setErrors,
   clearErrors,
   redirect,
-  resetRedirect
+  resetRedirect,
+  setPostLike
 } = postSlice.actions;

@@ -9,7 +9,8 @@ import {
   setErrors,
   clearErrors,
   redirect,
-  setPosts
+  setPosts,
+  setPostLike
 } from '../reducers/postReducer';
 
 export const createPost = (formState: FormData) => {
@@ -66,6 +67,33 @@ export const fetchAllPosts = () => {
         data: { errors }
       } = error?.response;
       dispatch(setErrors(errors));
+    }
+  };
+};
+
+export const like = (postId: string) => {
+  return async (dispatch: AppDispatch, getState: () => stateInterface) => {
+    const { userState } = getState();
+    const { token, user } = userState;
+    if (!token) {
+      return dispatch(setErrors([{ msg: 'token not found' }]));
+    }
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    };
+    try {
+      const { data } = await axios.put<{ msg: string; post: post }>(
+        `/posts/like/${postId}`,
+        null,
+        config
+      );
+
+      console.log(data);
+      dispatch(setPostLike({ postId: postId, userId: user!._id }));
+    } catch (error: any) {
+      console.log(error.response);
     }
   };
 };
