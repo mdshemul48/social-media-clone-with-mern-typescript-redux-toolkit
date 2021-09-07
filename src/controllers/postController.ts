@@ -116,7 +116,7 @@ export const like = async (req: Request, res: Response) => {
     }
 
     post.save();
-    return res.status(201).json({ msg: 'you liked the post' });
+    return res.status(201).json({ msg: 'you liked the post', post });
   } catch (error: any) {
     const errorMessage = error.message;
     return res.status(500).json({ errors: [{ msg: errorMessage }] });
