@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import formidable from 'formidable';
 import { v4 as uuid } from 'uuid';
-import { body } from 'express-validator';
+import { body as validatorBody } from 'express-validator';
 
 // ts interface
 import { UserInterface } from '../types/user';
@@ -11,7 +11,6 @@ import User from '../model/userModel';
 import Post from '../model/postModel';
 
 import saveImage from '../util/saveImage';
-import PostInterface from '../types/PostType';
 
 export const createPost = (req: Request, res: Response) => {
   const form = formidable({ multiples: true });
@@ -103,7 +102,10 @@ export const like = async (req: Request, res: Response) => {
     return res.status(400).json({ errors: [{ msg: 'post id not provided.' }] });
   }
   try {
-    const post: PostInterface = await Post.findOne({ _id: postId });
+    const post = await Post.findOne({ _id: postId });
+    if (!post) {
+      return res.status(404).json({ errors: [{ msg: 'post not found' }] });
+    }
     const { likes } = post;
     const isLikedIndex = likes.indexOf(userId);
 
@@ -122,9 +124,9 @@ export const like = async (req: Request, res: Response) => {
 };
 
 export const createCommentValidator = [
-  body('postId').notEmpty().withMessage('postId not provided.'),
-  body('comment').notEmpty().withMessage('body not provided'),
-  body('userId').notEmpty().withMessage('userId not provided')
+  validatorBody('postId').notEmpty().withMessage('postId not provided.'),
+  validatorBody('comment').notEmpty().withMessage('body not provided'),
+  validatorBody('userId').notEmpty().withMessage('userId not provided')
 ];
 
 export const createComment = async (req: Request, res: Response) => {
@@ -135,7 +137,10 @@ export const createComment = async (req: Request, res: Response) => {
   }: { postId: string; comment: string; userId: string } = req.body;
 
   try {
-    const post: PostInterface = await Post.findOne({ _id: postId });
+    const post = await Post.findOne({ _id: postId });
+    if (!post) {
+      return res.status(404).json({ errors: [{ msg: 'post not found' }] });
+    }
     post.comments.push({
       comment,
       userId

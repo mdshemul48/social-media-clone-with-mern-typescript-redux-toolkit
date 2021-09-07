@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose';
+import PostInterface from '../types/PostType';
 
 const postSchema = new Schema(
   {
@@ -35,4 +36,4 @@ const postSchema = new Schema(
   { timestamps: true }
 );
 
-export default model('Post', postSchema);
+export default model<PostInterface>('Post', postSchema);
