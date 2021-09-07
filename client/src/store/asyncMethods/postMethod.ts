@@ -69,3 +69,13 @@ export const fetchAllPosts = () => {
     }
   };
 };
+
+export const like = (post_id: string) => {
+  return (dispatch: AppDispatch, getState: () => stateInterface) => {
+    const { userState } = getState();
+    const { token } = userState;
+    if (!token) {
+      dispatch(setErrors([{ msg: 'token not found' }]));
+    }
+  };
+};
