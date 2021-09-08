@@ -13,12 +13,12 @@ const port = process.env.PORT || 5000;
 const server = express();
 // connecting mongoose
 mongooseConnect();
-server.use('/public', express.static(path.join(__dirname, '../images')));
+server.use('/api/public', express.static(path.join(__dirname, '../images')));
 server.use(cors());
 server.use(express.json());
 
 // all the routes
-server.use(app);
+server.use('/api', app);
 
 server.listen(port, () => {
   console.log(`api rocks in http://localhost:${port}`);
