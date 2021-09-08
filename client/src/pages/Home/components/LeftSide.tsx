@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { stateInterface } from '../../../types/stateInterface';
 
+// adding side bar
 import SideBarRow from './SideBarRow';
 
 const LeftSide = () => {
