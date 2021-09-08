@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors';
@@ -19,6 +19,15 @@ server.use(express.json());
 
 // all the routes
 server.use('/api', app);
+
+if (process.env.NODE_ENV === 'production') {
+  server.use(express.static('client/build'));
+  server.use((req: Request, res: Response) => {
+    console.log('hello');
+
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+  });
+}
 
 server.listen(port, () => {
   console.log(`api rocks in http://localhost:${port}`);
