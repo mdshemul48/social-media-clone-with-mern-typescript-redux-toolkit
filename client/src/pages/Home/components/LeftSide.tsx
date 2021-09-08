@@ -3,44 +3,44 @@ import { useSelector } from 'react-redux';
 import { stateInterface } from '../../../types/stateInterface';
 
 // adding side bar
-import SideBarRow from './SideBarRow';
+import SideBarText from './SideBarText';
 
 const LeftSide = () => {
   const { user } = useSelector((state: stateInterface) => state.userState);
   const { firstName, lastName, profileImage } = user!;
   return (
     <div>
-      <SideBarRow
+      <SideBarText
         imagePath={
           process.env.REACT_APP_BACKEND_API_LINK + '/public/' + profileImage
         }
         text={`${firstName} ${lastName}`}
       />
-      <SideBarRow
+      <SideBarText
         imagePath={
           'https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/S0U5ECzYUSu.png'
         }
         text="Friends"
       />
-      <SideBarRow
+      <SideBarText
         imagePath={
           'https://static.xx.fbcdn.net/rsrc.php/v3/y5/r/PrjLkDYpYbH.png'
         }
         text="Groups"
       />
-      <SideBarRow
+      <SideBarText
         imagePath={
           'https://static.xx.fbcdn.net/rsrc.php/v3/yH/r/kyCAf2jbZvF.png'
         }
         text="Pages"
       />
-      <SideBarRow
+      <SideBarText
         imagePath={
           'https://static.xx.fbcdn.net/rsrc.php/v3/yU/r/D2y-jJ2C_hO.png'
         }
         text="Marketplace"
       />
-      <SideBarRow
+      <SideBarText
         imagePath={
           'https://static.xx.fbcdn.net/rsrc.php/v3/y5/r/duk32h44Y31.png'
         }
