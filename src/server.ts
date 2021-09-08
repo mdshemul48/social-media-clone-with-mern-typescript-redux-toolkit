@@ -23,8 +23,6 @@ server.use('/api', app);
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static('client/build'));
   server.use((req: Request, res: Response) => {
-    console.log('hello');
-
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
   });
 }
