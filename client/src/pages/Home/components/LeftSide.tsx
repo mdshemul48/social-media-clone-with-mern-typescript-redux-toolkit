@@ -1,13 +1,19 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { stateInterface } from '../../../types/stateInterface';
+
 import SideBarRow from './SideBarRow';
+
 const LeftSide = () => {
+  const { user } = useSelector((state: stateInterface) => state.userState);
+  const { firstName, lastName, profileImage } = user!;
   return (
     <div>
       <SideBarRow
         imagePath={
-          'http://localhost:5000/public/fdc49ddc-7d1c-4061-a4b1-3d55ed10b29d.jpeg'
+          process.env.REACT_APP_BACKEND_API_LINK + '/public/' + profileImage
         }
-        text="MD. Shimul"
+        text={`${firstName} ${lastName}`}
       />
       <SideBarRow
         imagePath={

@@ -57,7 +57,7 @@ const Post: React.FC<{ post: post }> = (props) => {
       {comments.length > 0 || (likes.length > 0 && <hr className="my-1" />)}
       <div className="mx-2">
         <div className="d-flex justify-content-between">
-          <div>
+          <div className="d-flex align-content-center">
             {likes.length > 0 && (
               <>
                 <img src={likeImage} width="16" alt="" />
