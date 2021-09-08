@@ -8,8 +8,9 @@
     "server": "nodemon src/server.ts",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\" ",
-    "build": "concurrently \"tsc -p .\" \"cd client && npm run build\" ",
-    "lint": "./node_modules/.bin/eslint src/server.ts"
+    "build": "concurrently \"tsc -p .\" \"cd client && npm install && npm run build\" ",
+    "lint": "./node_modules/.bin/eslint src/server.ts",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm build"
   },
   "prettier": {
     "singleQuote": true,
