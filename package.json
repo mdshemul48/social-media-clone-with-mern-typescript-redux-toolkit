@@ -8,7 +8,7 @@
     "server": "nodemon src/server.ts",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\" ",
-    "build": "tsc -p . && cd client && npm install && npm run build",
+    "build": "tsc -p .",
     "lint": "./node_modules/.bin/eslint src/server.ts"
   },
   "prettier": {
