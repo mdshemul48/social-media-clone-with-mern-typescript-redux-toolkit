@@ -1,10 +1,10 @@
 import React from 'react';
 
-const sideBarRow: React.FC<{ imagePath: string; text: string }> = (props) => {
+const SideBarRow: React.FC<{ imagePath: string; text: string }> = (props) => {
   const { imagePath, text } = props;
   return (
     <div className="d-flex align-items-center my-2">
-      <div className="">
+      <div>
         <img
           width="35px"
           height="35px"
@@ -20,4 +20,4 @@ const sideBarRow: React.FC<{ imagePath: string; text: string }> = (props) => {
   );
 };
 
-export default sideBarRow;
+export default SideBarRow;
